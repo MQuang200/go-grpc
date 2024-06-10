@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option go_package = "github.com/MQuang200/my-grpc-proto/protogen/hello";
+
+message SumRequest {
+    int32 num1 = 1;
+    int32 num2 = 2;
+}
+
+message SumResponse {
+    int32 result = 1;
+}
+
+message PNDRequest {
+    int32 num = 1;
+}
+
+message PNDResponse {
+    int32 result = 1;
+}
+
+message AvgRequest {
+    float num = 1;
+}
+
+message AvgResponse {
+    float avg = 1;
+}
+
+message FMaxRequest {
+    int32 num = 1;
+}
+
+message FMaxResponse {
+    int32 max = 1;
+}
+
+service Calculator {
+    rpc Sum(SumRequest) returns (SumResponse) {}
+    rpc PrimeNumDecompose(PNDRequest) returns (stream SumResponse) {}
+    rpc Average(stream AvgRequest) returns (AvgResponse) {}
+    rpc FindMax(stream FMaxRequest) returns (stream FMaxResponse) {}
+}
